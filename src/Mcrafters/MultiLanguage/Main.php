@@ -1,6 +1,6 @@
-<?php
+<<?php
 
-namespace Mcrafterss;
+namespace Mcrafterss/MultiLanguage;
 
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
@@ -13,21 +13,32 @@ use pocketmine\utils\TextFormat;
 class Main extends PluginBase implements Listener{
 
 	private static $instance = null;
+	$this->NL = new Config($this->getDataFolder()."NL.yml", Config::YAML, array());
+	$this->EN = new Config($this->getDataFolder()."EN.yml", Config::YAML, array());
+	$this->FR = new Config($this->getDataFolder()."FR.yml", Config::YAML, array());
 	
-	private $langList = [
-		"def" => "English",
-		"en" => "English",
-		"fr" => "Français",
-		"nl" => "Nederlands",
-	];
 	
-	public function getPlayerLang($player)
+	public function getPlayerLang($player){
+		$player->getConfig()->get($player)
+	}
 	
-	public function setPlayerLang($player)
+	public function setPlayerLang($player, $language){
+		$player->getConfig()->set($player,$language)
+	}
 	
-	public function Translate($player, $message)
-	$lang = $player->getPlayerLang($player);
-	if $lang = NL
-	$this->NL->get->$message
-	
-	public function sendMessage($message)
+	public function Translate($player, $message){
+		$lang = $player->getPlayerLang($player);
+		if ($lang === nl){
+			$message2 = $this->NL->get($message);
+			$player->sendMessage($message2);
+		}
+		if ($lang === en){
+			$message2 = $this->EN->get($message);
+			$player->sendMessage($message2);
+		}
+		if ($lang === fr){
+			$message2 = $this->FR->get($message);
+			$player->sendMessage($message2);
+		}
+	}
+}
