@@ -1,4 +1,4 @@
-<?php
+<<?php
 
 namespace Mcrafterss\MultiLanguage;
 
@@ -13,11 +13,19 @@ use pocketmine\utils\TextFormat;
 class Main extends PluginBase implements Listener{
 
 	private static $instance = null;
-	$this->NL = new Config($this->getDataFolder()."NL.yml", Config::YAML, array());
-	$this->EN = new Config($this->getDataFolder()."EN.yml", Config::YAML, array());
-	$this->FR = new Config($this->getDataFolder()."FR.yml", Config::YAML, array());
+	public function onEnable(){
+		$this->getServer()->getLogger()->info(TextFormat::BLUE . "MultiLanguage Has Been Enabled.");
+		$this->getServer()->getLogger()->info(TextFormat::BLUE . "By: MCrafterss. http://github.com/MCrafterss");
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
+		$this->saveDefaultConfig();
+		$this->NL = new Config($this->getDataFolder()."NL.yml", Config::YAML, array());
+		$this->EN = new Config($this->getDataFolder()."EN.yml", Config::YAML, array());
+		$this->FR = new Config($this->getDataFolder()."FR.yml", Config::YAML, array());
+	}
 	
-	
+	public static function getInstance(){
+		return self::$instance;
+	}
 	public function getPlayerLang($player){
 		$player->getConfig()->get($player)
 	}
