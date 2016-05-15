@@ -1,6 +1,6 @@
 <<?php
 
-namespace Mcrafterss/MultiLanguage;
+namespace Mcrafterss\MultiLanguage;
 
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
